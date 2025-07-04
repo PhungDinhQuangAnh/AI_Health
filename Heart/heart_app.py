@@ -5,7 +5,7 @@ def run_heart_app():
     import joblib
     from datetime import datetime
     import os
-
+    .
     # Đường dẫn an toàn
     APP_DIR = os.path.dirname(os.path.abspath(__file__))
 
