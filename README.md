@@ -19,7 +19,7 @@ AI Health là ứng dụng Web tương tác được xây dựng bằng Python &
 ## 🖼️ Giao diện demo
 
 <p align="center">
-  <img src="https://github.com/PhungDinhQuangAnh/ai-health/assets/.png" alt="Giao diện demo">
+  <img src="https://github.com/PhungDinhQuangAnh/ai-health/blob/main/assets/demo.png" alt="Giao diện demo">
 </p>
 
 ---
