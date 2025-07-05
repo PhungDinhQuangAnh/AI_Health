@@ -1,7 +1,7 @@
 from streamlit_option_menu import option_menu
 import streamlit as st
 
-st.set_page_config(page_title="AI HEALTH", page_icon="🤖", layout="wide")
+st.set_page_config(page_title="AI Health", page_icon="🤖", layout="wide")
 with st.sidebar:
     # --- Header nổi bật ---
     st.markdown("""
