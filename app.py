@@ -151,7 +151,7 @@ with st.sidebar:
     </style>
 
     <div style="text-align: center; margin-top: 16px;">
-        <a href="https://github.com/PhungDinhQuangAnh/streamlit-ai-health" target="_blank" class="github-button">
+        <a href="https://github.com/PhungDinhQuangAnh/ai-health" target="_blank" class="github-button">
             🐱 Mã nguồn GitHub
         </a>
     </div>
