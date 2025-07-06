@@ -41,7 +41,7 @@ ai-health/
 ├── requirements.txt            # Danh sách thư viện cần cài
 ├── README.md                   # Tài liệu mô tả dự án
 ├── LICENSE                     # Giấy phép sử dụng
-├── demo/                     
+├── assets/                     
 │   └── demo.png                # Hình ảnh demo giao diện web
   
 ├── Medical_Cost/
