@@ -19,7 +19,8 @@ AI Health là ứng dụng Web tương tác được xây dựng bằng Python &
 ## 🖼️ Giao diện demo
 
 <p align="center">
-  <img src="https://github.com/PhungDinhQuangAnh/ai-health/blob/main/assets/demo.png" alt="Giao diện demo">
+  <img src="https://github.com/PhungDinhQuangAnh/ai-health/blob/main/Demo/demo1.png" alt="Giao diện demo">
+  <img src="https://github.com/PhungDinhQuangAnh/ai-health/blob/main/Demo/demo2.png" alt="Giao diện demo">
 </p>
 
 ---
@@ -41,9 +42,10 @@ ai-health/
 ├── requirements.txt            # Danh sách thư viện cần cài
 ├── README.md                   # Tài liệu mô tả dự án
 ├── LICENSE                     # Giấy phép sử dụng
-├── assets/                     
-│   └── demo.png                # Hình ảnh demo giao diện web
-  
+├── Demo/                     
+|    ├── demo1.png              # Hình ảnh demo giao diện web
+│    └── demo2.png
+
 ├── Medical_Cost/
 │   ├── medical_cost_app.py     # Ứng dụng Streamlit cho dự đoán chi phí y tế
 │   ├── dataset/
