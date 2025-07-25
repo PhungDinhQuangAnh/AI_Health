@@ -1,13 +1,16 @@
-name: 🔁 Keep Render App Alive
+name: 🔁 Keep Streamlit App Alive
 
 on:
   schedule:
-    - cron: "*/14 * * * *"  # Mỗi 14 phút
-  workflow_dispatch:  # Cho phép chạy tay nếu cần
+    - cron: "0 */11 * * *"  # Chạy mỗi 11 tiếng
+  workflow_dispatch:  # Cho phép chạy thủ công nếu cần
 
 jobs:
   ping:
     runs-on: ubuntu-latest
+
     steps:
-      - name: 🔁 Curl your Render app
-        run: curl -s --max-time 10 https://ai-health.streamlit.app || echo "App is sleeping"
+      - name: 🔁 Curl Streamlit app
+        run: |
+          echo "Pinging your app..."
+          curl -s --max-time 10 https://ai-health.streamlit.app || echo "App is sleeping or not reachable"
