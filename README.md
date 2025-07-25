@@ -37,7 +37,7 @@ AI Health là ứng dụng Web tương tác được xây dựng bằng Python &
 
 ## 📁 Cấu trúc dự án
 <pre>  
-ai-health/
+AI_Health/
 ├── app.py                      # App chính - giao diện chọn mô hình
 ├── requirements.txt            # Danh sách thư viện cần cài
 ├── README.md                   # Tài liệu mô tả dự án
