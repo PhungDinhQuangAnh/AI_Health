@@ -1,0 +1,13 @@
+name: 🔁 Keep Render App Alive
+
+on:
+  schedule:
+    - cron: "*/14 * * * *"  # Mỗi 14 phút
+  workflow_dispatch:  # Cho phép chạy tay nếu cần
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🔁 Curl your Render app
+        run: curl -s --max-time 10 https://ai-health.streamlit.app || echo "App is sleeping"
