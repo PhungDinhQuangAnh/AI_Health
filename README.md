@@ -45,7 +45,7 @@ AI_Health/
 ├── Demo/                     
 |    ├── demo1.png              # Hình ảnh demo giao diện web
 │    └── demo2.png
-
+│
 ├── Medical_Cost/
 │   ├── medical_cost_app.py     # Ứng dụng Streamlit cho dự đoán chi phí y tế
 │   ├── dataset/
@@ -57,7 +57,7 @@ AI_Health/
 │       ├── actual_vs_predicted.png    # Biểu đồ giá trị dự đoán vs thực tế
 │       ├── error_distribution.png     # Biểu đồ phân bố sai số
 │       └── medical_cost_metrics.json  # Chỉ số đánh giá mô hình
-
+│
 ├── Diabetes/
 │   ├── diabetes_app.py         # Ứng dụng Streamlit cho dự đoán tiểu đường
 │   ├── dataset/
@@ -68,7 +68,7 @@ AI_Health/
 │   └── report/
 │       ├── diabetes_classification_report.csv   # Chỉ số đánh giá
 │       └── diabetes_confusion_matrix.jpg        # Ma trận nhầm lẫn
-
+│
 ├── Heart/
 │   ├── heart_app.py            # Ứng dụng Streamlit cho dự đoán bệnh tim
 │   ├── dataset/
