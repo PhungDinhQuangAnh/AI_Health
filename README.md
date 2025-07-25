@@ -104,7 +104,7 @@ ai-health/
 ```bash
 # Clone repo về máy
 git clone https://github.com/PhungDinhQuangAnh/AI_Health.git
-cd ai-health
+cd AI_Health
 
 # Cài thư viện
 pip install -r requirements.txt
