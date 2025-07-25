@@ -103,7 +103,7 @@ ai-health/
 
 ```bash
 # Clone repo về máy
-git clone https://github.com/PhungDinhQuangAnh/ai-health.git
+git clone https://github.com/PhungDinhQuangAnh/AI_Health.git
 cd ai-health
 
 # Cài thư viện
