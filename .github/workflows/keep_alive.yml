@@ -2,7 +2,7 @@ name: 🔁 Keep Streamlit App Alive
 
 on:
   schedule:
-    - cron: "0 */11 * * *"  # Chạy mỗi 11 tiếng
+    - cron: "0 */8 * * *"  # Chạy mỗi 8 tiếng
   workflow_dispatch:  # Cho phép chạy thủ công nếu cần
 
 jobs:
@@ -11,6 +11,4 @@ jobs:
 
     steps:
       - name: 🔁 Curl Streamlit app
-        run: |
-          echo "Pinging your app..."
-          curl -s --max-time 10 https://ai-health.streamlit.app || echo "App is sleeping or not reachable"
+        run: curl -L https://ai-health.streamlit.app > /dev/null
