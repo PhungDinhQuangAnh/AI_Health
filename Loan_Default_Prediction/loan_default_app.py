@@ -12,14 +12,189 @@ def run_loan_default_app():
     CLASSIFICATION_REPORT_PATH = os.path.join(APP_DIR, "report", "loan_default_classification_report.csv")
     CONFUSION_MATRIX_PATH = os.path.join(APP_DIR, "report", "loan_default_confusion_matrix.jpg")
 
+    # --- CSS Internal ---
+    st.markdown("""
+    <style>
+        /* Ẩn 1 số element mặc định của streamlit */
+        .st-emotion-cache-gi0tri {
+            display: none !important;
+        }
+
+        /* Header trang và tiêu đề mỗi section */
+        .page-header {
+            text-align: center;
+            background: linear-gradient(to right, #60A5FA, #2563EB, #1E3A8A); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            font-weight: 800;
+            font-size: clamp(24px, 3.5vw + 1rem, 38px) !important;
+            margin-bottom: clamp(12px, 2vw, 30px) !important;
+        } 
+        hr {
+            margin: 0 0 1rem 0 !important;
+        }
+        .section-title {
+            font-size: clamp(16px, 0.85vw + 0.8rem, 25px) !important; 
+            font-weight: 650 !important; 
+            color: #0F172A; 
+            margin-top: clamp(10px, 2vw, 25px) !important;
+        }
+
+        /* Card kết quả dự đoán */
+        .result-banner {
+            background-color: var(--bg-color) !important; 
+            border-left: 6px solid var(--border-color) !important; 
+            padding: clamp(13px, 2vw, 20px); 
+            border-radius: 8px; 
+            margin-bottom: clamp(0px, 1.25vw, 12px)
+        }
+        .result-banner__title {
+            font-size: clamp(14.3px, 1vw + 0.5rem, 20px) !important;
+            margin: 0;
+            color: var(--text-color);
+        }
+        .result-banner__desc {
+            color: var(--text-color);
+            font-size: clamp(13.5px, 0.5vw + 0.6rem, 15px); 
+            margin: 0;
+            text-align: justify;
+            line-height: 1.5;
+        }
+        .card-metric {
+            background: #FFFFFF; 
+            margin-bottom: 1rem;
+            border: 1px solid #E2E8F0; 
+            padding: clamp(12px, 1.5vw, 15px); 
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04); 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; 
+        }
+        .card-metric__list {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
+        .card-metric__item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: clamp(8px, 1vw, 12px) 0;
+            border-bottom: 1px solid #F1F5F9;
+        }
+        .card-metric__label {
+            display: flex; 
+            align-items: center; 
+            gap: 8px;
+        }
+        .card-metric__label-text {
+            font-size: clamp(12px, 0.4vw + 0.55rem, 13.5px); 
+            color: #334155; 
+            font-weight: 500;
+        }
+        .card-metric__label-icon {
+            color: #64748B; 
+            font-size: clamp(15px, 1vw + 0.2rem, 18px);
+        }
+
+        /* Card hiệu suất mô hình */
+        .card-report {
+            padding: 15px; 
+            border-radius: 10px;
+            box-sizing: border-box;  
+            height: 100% !important;
+        }
+        .card-report--green {
+            background-color: #F0FDF4;
+            border-top: 2px solid #86EFAC;
+        }
+        .card-report--red {
+            background-color: #FEF2F2;
+            border-top: 2px solid #FCA5A5;
+        }
+        .card-report--yellow {
+            background-color: #FFFBEB;
+            border: 2px dashed #FDE047;
+            margin-bottom: 1rem;
+            margin-top: 10px;
+        }
+        .card-report__title {
+            display: flex !important;
+            gap: 5px !important;
+            align-items: center !important;
+            margin-bottom: 8px !important;
+            padding: 0 !important;
+        }
+        .card-report__icon {
+            font-size: clamp(20px, 1.5vw, 24px) !important;
+            line-height: 1 !important;
+        }
+        .card-report__title-content {
+            font-size: clamp(14px, 1.1vw, 16px) !important;
+            font-weight: 700 !important;
+            letter-spacing: 0.3px;
+        }
+        .card-report__title--green {
+            color: #166534 !important;
+        }
+        .card-report__title--red {
+            color: #991B1B !important;
+        }
+        .card-report__title--yellow {
+            color: #854D0E !important;
+        }
+        .card-report__list {
+            font-size: clamp(13px, 0.95vw, 14.5px) !important;
+            line-height: 1.6 !important;
+            padding-left: 20px !important; 
+            margin: 0 !important;
+            color: #334155;
+        }
+        .card-report__list li {
+            margin-bottom: 8px;
+        }
+
+        .card-report__list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .card-report__sublist {
+            padding-left: 20px !important;
+            margin-top: 4px !important;
+            margin-bottom: 6px !important;
+            list-style-type: circle !important;
+        }
+        /* Responsive theo main content */
+        section[data-testid="stMain"] {
+            container-type: inline-size !important;
+            container-name: main-viewport !important;
+            width: 100% !important;
+        }
+        div[data-testid="stColumn"] > div[data-testid="stVerticalBlock"] {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        @container main-viewport (max-width: 730px) {
+            div[data-testid="stHorizontalBlock"] {
+                flex-direction: column !important;
+            }
+            div[data-testid="stColumn"] {
+                width: 100% !important;
+            }
+            .card-report--red {
+                border-top: none;
+                border-bottom: 2px solid #FCA5A5;
+            }
+        }
+    </style>
+    """, unsafe_allow_html=True)
+
     # --- 1. Tiêu đề trang ---
-    st.markdown(
-    """
-    <h1 style="text-align: center; background: linear-gradient(to right, #60A5FA, #2563EB, #1E3A8A); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; margin: 0 0 20px 0; letter-spacing: -0.02em;">
+    st.markdown("""
+    <h1 class="page-header">
         Thẩm Định Rủi Ro & Duyệt Hồ Sơ Vay Vốn
     </h1>
-    """, 
-    unsafe_allow_html=True
+    """, unsafe_allow_html=True
     )
     st.markdown("---")
 
@@ -27,7 +202,12 @@ def run_loan_default_app():
     model = joblib.load(MODEL_PATH)
 
     # --- 3. Form nhập liệu người dùng ---
-    st.subheader("Nhập thông tin khách hàng")
+    st.markdown("""
+        <h2 class="section-title">
+            NHẬP THÔNG TIN KHÁCH HÀNG
+        </h2>
+    """, unsafe_allow_html=True
+    )
     with st.form("input_form"):
         tab1, tab2, tab3, tab4 = st.tabs([
             "▥ **Chi tiết Khoản vay**",
@@ -55,7 +235,7 @@ def run_loan_default_app():
                 Education =  st.selectbox("Học vấn (Education)", ["Trung học Phổ thông (High School)", "Cử nhân / Kỹ sư (Bachelor's)", "Thạc sĩ (Master's)", "Tiến sĩ (PhD)"])   
             with col2:
                 HasDependents = st.selectbox("Có người thân phụ thuộc? (Has Dependents)", ["Có", "Không"])
-                HasCoSigner = st.selectbox("Có người đồng ký tên/bảo lãnh? (Has Cosigner)", ["Có", "Không"])
+                HasCoSigner = st.selectbox("Có người đồng ký tên/bảo lãnh không? (Has Cosigner)", ["Có", "Không"])
             Age = st.slider("Tuổi (Age)", min_value=18, max_value=69, value=30, step=1) 
 
         # --- TAB 3: Năng lực Tài chính---
@@ -160,8 +340,12 @@ def run_loan_default_app():
 
     # --- ĐƯA PHẦN HIỂN THỊ RA NGOÀI FORM ĐỂ GIAO DIỆN RỘNG RÃI, ĐẸP MẮT ---
     if proba is not None:
-        st.markdown("<br>", unsafe_allow_html=True)
-        st.subheader("Kết quả phân tích")
+        st.markdown("""
+            <h2 class="section-title">
+                KẾT QUẢ PHÂN TÍCH
+            </h2>
+        """, unsafe_allow_html=True
+        )
         
         # Xác định nhóm màu sắc và nội dung thông báo dựa trên xác suất rủi ro
         if proba < 0.17:
@@ -188,9 +372,9 @@ def run_loan_default_app():
 
         # Thiết kế khối thông tin kết quả dạng Banner
         st.markdown(f"""
-            <div style="background-color:{bg_color}; border-left: 6px solid {border_color}; padding: 20px; border-radius: 8px; margin-bottom: 25px;">
-                <h4 style="color:{text_color}; margin-top:0;">{status_title}</h4>
-                <p style="color:{text_color}; font-size: 15px; margin-bottom:0;">{status_desc}</p>
+            <div class="result-banner" style="--bg-color:{bg_color}; --border-color:{border_color}">
+                <h4 class="result-banner__title" style="--text-color:{text_color}">{status_title}</h4>
+                <p class="result-banner__desc" style="--text-color:{text_color}">{status_desc}</p>
             </div>
         """, unsafe_allow_html=True)
 
@@ -215,38 +399,38 @@ def run_loan_default_app():
                     ]
                 }
             ))
-            fig.update_layout(height=260, margin=dict(l=20, r=20, t=40, b=20, pad=0))
+            fig.update_layout(height=220, margin=dict(l=0, r=0, t=50, b=5, pad=0))
             st.plotly_chart(fig, width='stretch')
             
         with res_col2:
             st.markdown(f"""
-                <div style="background: #FFFFFF; border: 1px solid #E2E8F0; padding: 18px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; margin-top: 15px; margin-left: 10px; margin-right: 10px">
-                    <div style="display: flex; flex-direction: column;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #F1F5F9;">
-                            <div style="display: flex; align-items: center; gap: 8px;">
-                                <span class="material-icons" style="color: {bar_color}; font-size: 18px; font-family: 'Material Icons' !important;">speed</span>
-                                <span style="font-size: 13.5px; color: #334155; font-weight: 500;">Mức độ rủi ro</span>
+                <div class="card-metric">
+                    <div class="card-metric__list">
+                        <div class="card-metric__item">
+                            <div class="card-metric__label">
+                                <span class="material-icons card-metric__label-icon">speed</span>
+                                <span class="card-metric__label-text">Mức độ rủi ro</span>
                             </div>
                             <span style="font-size: 14px; font-weight: 700; color: {text_color};">{proba * 100:.2f}%</span>
                         </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #F1F5F9;">
-                            <div style="display: flex; align-items: center; gap: 8px;">
-                                <span class="material-icons" style="color: #64748B; font-size: 18px; font-family: 'Material Icons' !important;">account_balance_wallet</span>
-                                <span style="font-size: 13.5px; color: #334155; font-weight: 500;">Chỉ số Nợ/Thu nhập (DTI)</span>
+                        <div class="card-metric__item">
+                            <div class="card-metric__label">
+                                <span class="material-icons card-metric__label-icon">account_balance_wallet</span>
+                                <span class="card-metric__label-text">Chỉ số Nợ/Thu nhâp (DTI)</span>
                             </div>
                             <span style="font-size: 13px; font-weight: 700; color: #0F172A; background: #F1F5F9; padding: 2px 8px; border-radius: 6px; border: 1px solid #E2E8F0;">{DTIRatio}</span>
                         </div>  
-                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #F1F5F9;">
-                            <div style="display: flex; align-items: center; gap: 8px;">
-                                <span class="material-icons" style="color: #64748B; font-size: 18px; font-family: 'Material Icons' !important;">attach_money</span>
-                                <span style="font-size: 13.5px; color: #334155; font-weight: 500;">Số tiền vay</span>
+                        <div class="card-metric__item">
+                            <div class="card-metric__label">
+                                <span class="material-icons card-metric__label-icon">attach_money</span>
+                                <span class="card-metric__label-text">Số tiền vay</span>
                             </div>
                             <span style="font-size: 14px; font-weight: 700; color: #0F172A; letter-spacing: -0.01em;">${LoanAmount:,}</span>
                         </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0 4px 0;">
-                            <div style="display: flex; align-items: center; gap: 8px;">
-                                <span class="material-icons" style="color: #64748B; font-size: 18px; font-family: 'Material Icons' !important;">calendar_today</span>
-                                <span style="font-size: 13.5px; color: #334155; font-weight: 500;">Kỳ hạn</span>
+                        <div class="card-metric__item">
+                            <div class="card-metric__label">
+                                <span class="material-icons card-metric__label-icon">calendar_today</span>
+                                <span class="card-metric__label-text">Kỳ hạn</span>
                             </div>
                             <span style="font-size: 12px; font-weight: 600; color: #2563EB; background: #EFF6FF; padding: 2px 8px; border-radius: 6px; border: 1px solid #DBEAFE;">{LoanTerm} tháng</span>
                         </div>
@@ -256,11 +440,14 @@ def run_loan_default_app():
     
     # --- 5. Hiển thị lịch sử dự đoán ---
     if st.session_state["loan_history"]:
-        st.markdown("<br>", unsafe_allow_html=True)
-        st.subheader("Lịch sử phân tích")
+        st.markdown("""
+            <h2 class="section-title">
+                LỊCH SỬ PHÂN TÍCH
+            </h2>
+        """, unsafe_allow_html=True
+        )
         df_history = pd.DataFrame(st.session_state["loan_history"])
 
-        # Hàm highlight dòng cuối cùng (bản ghi mới nhất) với tone xanh nhạt
         def highlight_last(s):
             return ['background-color: #EBF5FB' if i == len(s) - 1 else '' for i in range(len(s))]
 
@@ -268,14 +455,16 @@ def run_loan_default_app():
             df_history.style.apply(highlight_last, axis=0),
             width='stretch'
         )
-
-        # --- 6. Đánh giá hiệu suất mô hình ---
-        st.markdown("<br>", unsafe_allow_html=True)
-        st.subheader("Hiệu suất mô hình")
+        # --- 6. Hiệu suất mô hình ---
+        st.markdown("""
+            <h2 class="section-title">
+                HIỆU SUẤT MÔ HÌNH
+            </h2>
+        """, unsafe_allow_html=True
+        )
         with st.expander("**Xem chi tiết**"):
             tab5, tab6 = st.tabs(["**Classification Report (Chỉ số chi tiết)**", "**Confusion Matrix (Số liệu chi tiết)**"])
-            
-            # --- 6_1. Classification Report ---
+                # --- 6_1. Classification Report ---
             with tab5:
                 # Đọc dữ liệu từ file CSV
                 report_df = pd.read_csv(CLASSIFICATION_REPORT_PATH, index_col=0)
@@ -315,48 +504,56 @@ def run_loan_default_app():
                 
                 with analysis_col1:
                     st.markdown(f"""
-                    <div style='background-color: #E8F8F5; padding: 15px; border-radius: 8px; border-top: 4px solid #2ECC71; height: 100%;'>
-                        <h6 style='color: #117864; margin-top:0;'><b>🟢 NHÓM KHÔNG VỠ NỢ (CLASS 0)</b></h6>
-                        <ul style='font-size: 15px; padding-left: 18px; margin-bottom:0;'>
-                            <li><b>Precision ({p_0:.0f}%):</b> Cứ mỗi <b>100</b> người được mô hình dự đoán là khách hàng an toàn (không vỡ nợ) thì đúng được <b>90</b> người - (sai 10 người).</li>
-                            <li><b>Recall ({r_0:.0f}%):</b> Trong mỗi <b>1000</b> người an toàn thực sự thì mô hình nhận diện được <b>970</b> người - (bỏ sót 30 người).</li>
+                    <div class="card-report card-report--green">
+                        <div class="card-report__title card-report__title--green">
+                            <span class="material-icons card-report__icon">verified_user</span>
+                            <b card-report__title-content>NHÓM KHÔNG VỠ NỢ (CLASS 0)</b>
+                        </div>
+                        <ul class="card-report__list">
+                            <li class="card-report__item"><b>Precision ({p_0:.0f}%):</b> Cứ mỗi <b>100</b> người được mô hình dự đoán là khách hàng an toàn (không vỡ nợ) thì đúng được <b>90</b> người - (sai 10 người).</li>
+                            <li class="card-report__item"><b>Recall ({r_0:.0f}%):</b> Trong mỗi <b>1000</b> người an toàn thực sự thì mô hình nhận diện được <b>970</b> người - (bỏ sót 30 người).</li>
                         </ul>
                     </div>
                     """, unsafe_allow_html=True)
                     
                 with analysis_col2:
                     st.markdown(f"""
-                    <div style='background-color: #FDEDEC; padding: 15px; border-radius: 8px; border-top: 4px solid #E74C3C; height: 100%;'>
-                        <h6 style='color: #78281F; margin-top:0;'><b>🔴 NHÓM VỠ NỢ (CLASS 1)</b></h6>
-                        <ul style='font-size: 15px; padding-left: 18px; margin-bottom:0;'>
-                            <li><b>Precision ({p_1:.0f}%):</b> Cứ mỗi <b>100</b> người được mô hình dự đoán là khách hàng có nguy cơ vỡ nợ thì đúng được <b>44</b> người - (sai 56 người).</li>
-                            <li><b>Recall ({r_1:.0f}%):</b> Trong mỗi <b>1000</b> người vỡ nợ thực sự thì mô hình nhận diện được <b>200</b> người - (bỏ sót 800 người).</li>
+                    <div class="card-report card-report--red">
+                        <div class="card-report__title card-report__title--red">
+                            <span class="material-icons card-report__icon">gpp_bad</span>
+                            <b card-report__title-content>NHÓM VỠ NỢ (CLASS 1)</b>
+                        </div>
+                        <ul class="card-report__list">
+                            <li class="card-report__item"><b>Precision ({p_1:.0f}%):</b> Cứ mỗi <b>100</b> người được mô hình dự đoán là khách hàng có nguy cơ vỡ nợ thì đúng được <b>44</b> người - (sai 56 người).</li>
+                            <li class="card-report__item"><b>Recall ({r_1:.0f}%):</b> Trong mỗi <b>1000</b> người vỡ nợ thực sự thì mô hình nhận diện được <b>200</b> người - (bỏ sót 800 người).</li>
                         </ul>
                     </div>
                     """, unsafe_allow_html=True)
 
                 # Nhận xét về bài toán dữ liệu mất cân bằng cho báo cáo
-                st.markdown(f"""
-                <br>
-                <div style='background-color: #FEF9E7; padding: 15px; border-radius: 8px; border-left: 4px solid #F4D03F; margin-bottom: 20px;'>
-                    <h5 style='color: #7D6608; margin-top:0;'><b>⚠️ Nhận xét:</b></h5>
-                    <p style='font-size: 15px; margin-bottom: 0; line-height: 1.5;'>
-                        <ul>
-                            <li><b>Cơ chế phân loại mặc định:</b> Kết quả như bảng trên</b>.
-                            <ul style='padding-left: 18px'>
-                                <li>Nếu <b>xác suất khách hàng vỡ nợ >= 50%</b>, hồ sơ sẽ được xếp vào nhóm khách hàng vỡ nợ <b>(Class 1)</b>.</li>
-                                <li>Nếu <b> xác suất khách hàng vỡ nợ < 50%</b> thì hồ sơ sẽ được xếp vào nhóm khách hàng không vỡ nợ <b>(Class 0)</b>.</li>
+                st.markdown("""
+                <div class="card-report card-report--yellow">
+                    <div class="card-report__title card-report__title--yellow">
+                        <span class="material-icons card-report__icon">tips_and_updates</span>
+                        <b class="card-report__title-content">NHẬN XÉT</b>
+                    </div>
+                    <ul class="card-report__list">
+                        <li><b>Cơ chế phân loại mặc định:</b> Kết quả như bảng trên.
+                            <ul class="card-report__sublist">
+                                <li>Nếu <b>xác suất khách hàng vỡ nợ &ge; 50%</b>, hồ sơ sẽ được xếp vào nhóm khách hàng vỡ nợ <b>(Class 1)</b>.</li>
+                                <li>Nếu <b>xác suất khách hàng vỡ nợ &lt; 50%</b> thì hồ sơ sẽ được xếp vào nhóm khách hàng không vỡ nợ <b>(Class 0)</b>.</li>
                             </ul>
-                            <li><b>Thách thức dữ liệu:</b> Dữ liệu nợ xấu rất ít (chỉ chiếm <b>11.6%</b> tổng số hồ sơ trong bộ dữ liệu).</li>
-                            <li><b>Hệ quả:</b> Mô hình bị thiên vị, xu hướng tập trung dự đoán nhóm an toàn (Class 0) và dễ bỏ sót các ca vỡ nợ thực tế (Class 1).</li>
-                            <li><b>Giải pháp 3 vùng quyết định:</b> Để khắc phục, thay vì để ngưỡng dự đoán mặc định là <b>50% vỡ nợ</b> và <b>50% không vỡ nợ</b>, thì mô hình chia thành 3 vùng kết quả với mục tiêu khác nhau:</li>
-                            <ul style='padding-left: 18px'>
-                                <li><b>Vùng An toàn (< 17%):</b> Độ chính xác >= 95%, tự động duyệt các hồ sơ an toàn.</li>
-                                <li><b>Vùng Từ chối (> 75%):</b> Đạt độ chính xác >= 70%, tự động loại bỏ các hồ sơ rủi ro cao.</li>
-                                <li><b>Vùng Thẩm định lại (17% - 75%)</b>: Gom các hồ sơ mập mờ còn lại để chuyển về duyệt tay, giải phóng hơn một nửa áp lực vận hành.</li>
+                        </li>
+                        <li><b>Thách thức dữ liệu:</b> Dữ liệu nợ xấu rất ít (chỉ chiếm <b>11.6%</b> tổng số hồ sơ trong bộ dữ liệu).</li>
+                        <li><b>Hệ quả:</b> Mô hình bị thiên vị, xu hướng tập trung dự đoán nhóm an toàn (Class 0) và dễ bỏ sót các ca vỡ nợ thực tế (Class 1).</li>
+                        <li><b>Giải pháp 3 vùng quyết định:</b> Để khắc phục, thay vì để ngưỡng dự đoán mặc định là <b>50% vỡ nợ</b> và <b>50% không vỡ nợ</b>, mô hình chia thành 3 vùng kết quả với mục tiêu khác nhau:
+                            <ul class="card-report__sublist">
+                                <li><b>Vùng An toàn (&lt; 17%):</b> Độ chính xác &ge; 95%, tự động duyệt các hồ sơ an toàn.</li>
+                                <li><b>Vùng Từ chối (&gt; 75%):</b> Đạt độ chính xác &ge; 70%, tự động loại bỏ các hồ sơ rủi ro cao.</li>
+                                <li><b>Vùng Thẩm định lại (17% - 75%):</b> Gom các hồ sơ mập mờ còn lại để chuyển về duyệt tay, giải phóng hơn một nửa áp lực vận hành.</li>
                             </ul>
-                        </ul>
-                    </p>
+                        </li>
+                    </ul>
                 </div>
                 """, unsafe_allow_html=True)
 
@@ -404,8 +601,12 @@ def run_loan_default_app():
                     """, unsafe_allow_html=True)
 
         # --- 7. Thông tin thêm ---
-        st.markdown("<br>", unsafe_allow_html=True)
-        st.subheader("Thông tin thêm")
+        st.markdown("""
+            <h2 class="section-title">
+                THÔNG TIN THÊM
+            </h2>
+        """, unsafe_allow_html=True
+        )
         with st.expander("**Xem chi tiết**"):
             st.markdown("""
             <div style='font-size: 15px'>
