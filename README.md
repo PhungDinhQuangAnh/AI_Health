@@ -31,7 +31,7 @@
 ## Cấu trúc dự án
 <pre>  
 Banking_Intelligence_Platform/
-├── app.py                      # Giao diện sidebar chọn mô hình
+├── .streamlit                  # Cấu hình streamlit
 ├── requirements.txt            # Danh sách thư viện cần cài
 ├── README.md                   # Tài liệu mô tả dự án
 ├── LICENSE                     # Giấy phép sử dụng
@@ -41,6 +41,8 @@ Banking_Intelligence_Platform/
 │    ├── demo3.png
 │    └── demo4.png
 │
+├── app.py                             # Giao diện sidebar chọn mô hình
+│  
 ├── Credit_Card_Segmentation/
 │    ├── credit_card_app.py            # Giao diện trang Phân Khúc Khách Hàng Thẻ Tín Dụng
 │    ├── dataset/
