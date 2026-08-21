@@ -31,7 +31,7 @@
 ## Cấu trúc dự án
 <pre>  
 Banking_Intelligence_Platform/
-├── app.py                      # Giao diện chọn mô hình
+├── app.py                      # Giao diện sidebar chọn mô hình
 ├── requirements.txt            # Danh sách thư viện cần cài
 ├── README.md                   # Tài liệu mô tả dự án
 ├── LICENSE                     # Giấy phép sử dụng
@@ -74,7 +74,7 @@ Banking_Intelligence_Platform/
 ## Công nghệ sử dụng
 
 - **Ngôn ngữ:** Python
-- **Web UI:** streamlit
+- **Web UI:** streamlit, html, css
 - **Xử lý dữ liệu:** pandas, numpy
 - **Machine Learning:** scikit-learn, xgboost
 - **Trực quan hóa:** matplotlib, seaborn, plotly
