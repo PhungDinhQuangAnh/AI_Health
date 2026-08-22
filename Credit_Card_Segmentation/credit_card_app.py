@@ -470,14 +470,14 @@ def run_credit_card_app():
             /* ----------------------------------------------------------- */
 
             /* --- Căn cân đối ratio --- */
+            div[data-testid="stElementContainer"],
             div[data-testid="stRadio"],
-            div[data-testid="stRadio"] > div {
+            div[data-testid="stRadio"] > div[data-testid="stRadioGroup"] {
                 width: 100% !important;
             }
             div[data-testid="stRadio"] > div[data-testid="stRadioGroup"] {
                 display: flex !important;
                 justify-content: space-between !important;
-                width: 100% !important;
             }
             
             /* Xóa biểu tượng bên cạnh page header */
