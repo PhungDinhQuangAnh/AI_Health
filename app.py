@@ -26,7 +26,6 @@ st.markdown("""
             justify-content: center;
             gap: 10px;
         }
-
         .sidebar-section {
             font-size: 20px;
             font-weight: 600;
@@ -38,7 +37,6 @@ st.markdown("""
             align-items: center;
             gap: 8px;
         }
-
         .card {
             background-color: #ffffff;
             padding: 16px 18px;
@@ -48,49 +46,40 @@ st.markdown("""
             line-height: 1.6;
             margin-bottom: 25px;
             transition: all 0.25s ease-in-out;
-        }
-        
+        }       
         .card--bordered {
             border-left: 4px solid #5DADE2;
         }
-
         .card:hover {
             background-color: #f2fbff;;
             box-shadow: 0 6px 12px rgba(0,0,0,0.08);
         }
-
         .card__list {
             padding-left: 10px;
             margin: 10px 0;
-        }
-        
+        }   
         .card__list-item {
             margin-bottom: 6px;
             text-align: justify;
         }
-
         .card__warning {
             font-size: 13px;
             color: #666;
         }
-
         .card__author-name {
             color: #1B4F72;
             font-weight: 700;
             font-size: 16px;
         }
-
         .card__copyright {
             font-size: 14px;
             color: #888888;
             margin-top: 4px;
         }
-
         .github-btn {
             text-align: center;
             margin-top: 5px;
         }
-
         .github-btn__link {
             display: inline-flex;
             align-items: center;
@@ -106,17 +95,14 @@ st.markdown("""
             box-shadow: 0 4px 6px rgba(0,0,0,0.15);
             transition: all 0.25s ease-in-out;
         }
-
         .github-btn__link:hover {
             background-color: #2f363d;
             transform: translateY(-3px);
             box-shadow: 0 6px 12px rgba(0,0,0,0.25);
         }
-
         section[data-testid="stSidebar"] {
             box-shadow: 4px 0px 16px rgba(0, 0, 0, 0.15) !important;
-        }
-        
+        }     
         div[data-testid="stTabs"] [role="tablist"] {
             display: flex !important;
             width: 100% !important;
@@ -146,7 +132,7 @@ with st.sidebar:
     selected_app = option_menu(
         menu_title=None,
         options=["Phân Khúc Khách Hàng Thẻ Tín Dụng", "Thẩm Định Rủi Ro & Duyệt Hồ Sơ Vay vốn"],
-        icons=["shield-check", "people"],
+        icons=["people", "shield-check"],
         default_index=0,
         styles={
             "container": {
