@@ -470,6 +470,10 @@ def run_credit_card_app():
             /* ----------------------------------------------------------- */
 
             /* --- Căn cân đối ratio --- */
+            div[data-testid="stRadio"],
+            div[data-testid="stRadio"] > div {
+                width: 100% !important;
+            }
             div[data-testid="stRadio"] > div[data-testid="stRadioGroup"] {
                 display: flex !important;
                 justify-content: space-between !important;
