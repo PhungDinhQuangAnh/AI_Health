@@ -1046,6 +1046,3 @@ def run_credit_card_app():
             </div>
         </div>
         """, unsafe_allow_html=True)
-
-
-        
