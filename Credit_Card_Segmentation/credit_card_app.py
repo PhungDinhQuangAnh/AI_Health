@@ -470,16 +470,12 @@ def run_credit_card_app():
             /* ----------------------------------------------------------- */
 
             /* --- Căn cân đối ratio --- */
-            div[data-testid="stElementContainer"],
-            div[data-testid="stElementContainer"] > div[data-testid="stRadio"] {
+            div[data-testid="stRadio"] > div[data-testid="stRadioGroup"] {
+                display: flex !important;
+                justify-content: space-between !important;
                 width: 100% !important;
             }
-            div[data-testid="stElementContainer"] > div[data-testid="stRadio"] > .st-ag {
-                justify-content: space-between !important;
-            }
-            div[data-testid="stElementContainer"] > div[data-testid="stRadio"] > .st-ag >.st-ci {
-                margin-right: 0 !important;
-            }
+            
             /* Xóa biểu tượng bên cạnh page header */
             .st-emotion-cache-gi0tri {
                 display: none !important;
