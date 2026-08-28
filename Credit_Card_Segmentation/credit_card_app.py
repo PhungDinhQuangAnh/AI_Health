@@ -677,6 +677,7 @@ def run_credit_card_app():
                 fig3d.update_traces(marker=dict(size=1.5), hovertemplate=tsne_hovertemplate)
                 fig3d.update_layout(
                     margin=dict(t=0,l=0,b=0,r=0),
+                    responsive=True,
                     autosize=True,
                     height=450,
                     scene=dict(
@@ -700,6 +701,7 @@ def run_credit_card_app():
                 fig2d.update_traces(marker=dict(size=4.5), hovertemplate=tsne_hovertemplate)
                 fig2d.update_layout(
                     margin=dict(t=0,l=0,b=0,r=0),
+                    responsive=True,
                     autosize=True,
                     height=450,
                     xaxis=dict(title=None, showgrid=True, gridcolor="#CBD5E1", zerolinecolor="#475569"),
