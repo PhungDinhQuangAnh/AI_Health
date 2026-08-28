@@ -4,7 +4,7 @@ from Loan_Default_Prediction.loan_default_app import run_loan_default_app
 from Credit_Card_Segmentation.credit_card_app import run_credit_card_app
 
 # --- Cấu hình trang ---
-st.set_page_config(page_title="Banking Intelligence Platform", page_icon=":bank:", layout="wide", initial_sidebar_state=310)
+st.set_page_config(page_title="Banking Intelligence Platform", page_icon=":bank:", layout="wide", initial_sidebar_state="collapsed")
 
 # --- Nạp thư viện Icon ---
 st.markdown('<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">', unsafe_allow_html=True)
@@ -107,6 +107,64 @@ st.markdown("""
             display: flex !important;
             width: 100% !important;
             justify-content: space-around !important;
+        }
+
+         /* =========================================================
+        STYLE NÚT MỞ SIDEBAR: TONE SÁNG + NHÃN MENU + PULSE EFFECT
+        ========================================================= */
+
+        /* 1. Định nghĩa hiệu ứng Pulse (tỏa sáng viền xanh nhạt) */
+        @keyframes lightMenuPulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(46, 134, 193, 0.45);
+            }
+            70% {
+                box-shadow: 0 0 0 9px rgba(46, 134, 193, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(46, 134, 193, 0);
+            }
+        }
+
+        /* 2. Style chính cho nút Mở Sidebar */
+        button[data-testid="stExpandSidebarButton"] {
+            position: fixed !important;
+            top: 14px !important;
+            left: 14px !important;
+            z-index: 999999 !important;
+            background-color: #FFFFFF !important;              /* Nền trắng sáng tiệp tone trang web */
+            border: 2px solid #2E86C1 !important;              /* Viền xanh đậm tạo nét sắc sảo */
+            border-radius: 20px !important;                     /* Dạng Bo tròn Capsule mềm mại */
+            padding: 5px 14px 5px 10px !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 6px !important;
+            animation: lightMenuPulse 2.2s infinite !important; /* Kích hoạt hiệu ứng nhấp nháy viền */
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        }
+
+        /* 3. Thêm chữ "MENU" nổi bật cạnh icon */
+        button[data-testid="stExpandSidebarButton"]::after {
+            content: "MENU";
+            color: #1B4F72;                                    /* Chữ màu xanh Navy sang trọng */
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 0.6px;
+        }
+
+        /* 4. Style icon mũi tên bên trong */
+        button[data-testid="stExpandSidebarButton"] span {
+            color: #2E86C1 !important;                         /* Icon xanh sáng đồng bộ viền */
+            font-size: 1.3rem !important;
+        }
+
+        /* 5. Hiệu ứng Hover linh hoạt */
+        button[data-testid="stExpandSidebarButton"]:hover {
+            animation: none !important;                         /* Tắt pulse khi rê chuột */
+            background-color: #E6F7FF !important;              /* Highlight nền xanh nhạt */
+            border-color: #1B4F72 !important;                  /* Viền đậm hơn */
+            transform: translateY(-2px) scale(1.03) !important;/* Nổi nhẹ lên */
+            box-shadow: 0 6px 16px rgba(46, 134, 193, 0.25) !important;
         }
     </style>
 """, unsafe_allow_html=True)
