@@ -4,7 +4,7 @@ from Loan_Default_Prediction.loan_default_app import run_loan_default_app
 from Credit_Card_Segmentation.credit_card_app import run_credit_card_app
 
 # --- Cấu hình trang ---
-st.set_page_config(page_title="Banking Intelligence Platform", page_icon=":bank:", layout="wide", initial_sidebar_state=345)
+st.set_page_config(page_title="Banking Intelligence Platform", page_icon=":bank:", layout="wide", initial_sidebar_state="collapsed")
 
 # --- Nạp thư viện Icon ---
 st.markdown('<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">', unsafe_allow_html=True)
@@ -14,7 +14,7 @@ st.markdown('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs
 st.markdown("""
     <style>
         .sidebar-header {
-            font-size: 25px;
+            font-size: 20px;
             font-weight: 800;
             color: #1B4F72;
             border-bottom: 3px solid #2980B9;
@@ -152,9 +152,9 @@ st.markdown("""
             transform: translateY(-2px) scale(1.03) !important;
             box-shadow: 0 6px 16px rgba(46, 134, 193, 0.25) !important;
         }
-        @media (max-width: 1024px) {
+        @media (min-width: 1300px) {
             section[data-testid="stSidebar"] {
-                position: fixed !important;
+                position: relative !important;
                 height: 100vh !important;
             }
         }
