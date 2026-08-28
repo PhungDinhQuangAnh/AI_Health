@@ -14,7 +14,7 @@ st.markdown('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs
 st.markdown("""
     <style>
         .sidebar-header {
-            font-size: 20px;
+            font-size: 21px;
             font-weight: 800;
             color: #1B4F72;
             border-bottom: 3px solid #2980B9;
@@ -151,12 +151,6 @@ st.markdown("""
             border-color: #1B4F72 !important;              
             transform: translateY(-2px) scale(1.03) !important;
             box-shadow: 0 6px 16px rgba(46, 134, 193, 0.25) !important;
-        }
-        @media (min-width: 1300px) {
-            section[data-testid="stSidebar"] {
-                position: relative !important;
-                height: 100vh !important;
-            }
         }
     </style>
 """, unsafe_allow_html=True)
