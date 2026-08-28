@@ -4,6 +4,7 @@ import numpy as np
 import plotly.express as px
 import joblib
 import os
+import streamlit.components.v1 as components
 
 def run_credit_card_app():
     # --- Lấy các đường dẫn ---
@@ -528,7 +529,27 @@ def run_credit_card_app():
             }
         </style>
     """, unsafe_allow_html=True)
-
+    
+    # Chèn JavaScript để tự động kích hoạt resize ngay sau khi DOM load xong
+    components.html("""
+        <script>
+            const observer = new ResizeObserver(() => {
+                window.dispatchEvent(new Event('resize'));
+            });
+            
+            // Theo dõi sự thay đổi kích thước của vùng stMain
+            const mainContainer = window.parent.document.querySelector('section[data-testid="stMain"]');
+            if (mainContainer) {
+                observer.observe(mainContainer);
+            }
+    
+            // Trigger thêm 1 lần nữa sau 300ms để chắc chắn Sidebar đã render xong hoàn toàn
+            setTimeout(() => {
+                window.dispatchEvent(new Event('resize'));
+            }, 300);
+        </script>
+    """, height=0)
+    
     # --- 1. Tiêu đề trang ---
     st.markdown("""
         <h1 class="page-header">
