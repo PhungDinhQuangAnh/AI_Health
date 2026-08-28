@@ -71,25 +71,41 @@ def run_credit_card_app():
         return df
     df_final = load_data()
 
-    # Chèn JavaScript để tự động kích hoạt resize ngay sau khi DOM load xong
-    components.html("""
-        <script>
-            const observer = new ResizeObserver(() => {
-                window.dispatchEvent(new Event('resize'));
-            });
-            
-            // Theo dõi sự thay đổi kích thước của vùng stMain
-            const mainContainer = window.parent.document.querySelector('section[data-testid="stMain"]');
-            if (mainContainer) {
-                observer.observe(mainContainer);
-            }
+    st.markdown("""
+    <style>
+        /* Ép khung chứa chính luôn co giãn chuẩn */
+        section[data-testid="stMain"] > div:first-child {
+            width: 100% !important;
+            max-width: 100% !important;
+        }
     
-            // Trigger thêm 1 lần nữa sau 300ms để chắc chắn Sidebar đã render xong hoàn toàn
-            setTimeout(() => {
-                window.dispatchEvent(new Event('resize'));
-            }, 300);
-        </script>
-    """, height=0)
+        /* Đổi Container Query thành Media Query dựa trên màn hình */
+        @media screen and (max-width: 992px) {
+            /* Chuyển các cột Streamlit (st.columns) về dạng 1 cột dọc khi dưới 992px */
+            div[data-testid="stHorizontal"] {
+                flex-direction: column !important;
+            }
+            div[data-testid="stColumn"] {
+                width: 100% !important;
+                min-width: 100% !important;
+            }
+            
+            /* Chỉnh lại Grid KPI / Cards của bạn */
+            .card-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+            .card-info__grid {
+                grid-template-columns: repeat(1, 1fr) !important;
+            }
+        }
+    
+        @media screen and (max-width: 576px) {
+            .card-grid {
+                grid-template-columns: repeat(1, 1fr) !important;
+            }
+        }
+    </style>
+    """, unsafe_allow_html=True)
     
     # --- CSS Internal ---
     st.markdown("""
