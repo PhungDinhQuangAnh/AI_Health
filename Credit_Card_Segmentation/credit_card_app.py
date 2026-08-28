@@ -4,7 +4,6 @@ import numpy as np
 import plotly.express as px
 import joblib
 import os
-import streamlit.components.v1 as components
 
 def run_credit_card_app():
     # --- Lấy các đường dẫn ---
@@ -70,42 +69,6 @@ def run_credit_card_app():
         df["Nhóm"] = df["Full_Nhóm"].map(COLOR_HTML_MAP)
         return df
     df_final = load_data()
-
-    st.markdown("""
-    <style>
-        /* Ép khung chứa chính luôn co giãn chuẩn */
-        section[data-testid="stMain"] > div:first-child {
-            width: 100% !important;
-            max-width: 100% !important;
-        }
-    
-        /* Đổi Container Query thành Media Query dựa trên màn hình */
-        @media screen and (max-width: 992px) {
-            /* Chuyển các cột Streamlit (st.columns) về dạng 1 cột dọc khi dưới 992px */
-            div[data-testid="stHorizontal"] {
-                flex-direction: column !important;
-            }
-            div[data-testid="stColumn"] {
-                width: 100% !important;
-                min-width: 100% !important;
-            }
-            
-            /* Chỉnh lại Grid KPI / Cards của bạn */
-            .card-grid {
-                grid-template-columns: repeat(2, 1fr) !important;
-            }
-            .card-info__grid {
-                grid-template-columns: repeat(1, 1fr) !important;
-            }
-        }
-    
-        @media screen and (max-width: 576px) {
-            .card-grid {
-                grid-template-columns: repeat(1, 1fr) !important;
-            }
-        }
-    </style>
-    """, unsafe_allow_html=True)
     
     # --- CSS Internal ---
     st.markdown("""
